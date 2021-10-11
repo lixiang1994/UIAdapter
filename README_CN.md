@@ -54,7 +54,7 @@ import UIAdapter
 
 下面是一些简单示例. 支持所有设备和模拟器:
 
-### Auto
+### Zoom
 
 
 AutoLayout (SnapKit): 
@@ -62,27 +62,27 @@ AutoLayout (SnapKit):
 ```swift
 private func setupLayout() {
     cardView.snp.makeConstraints { (make) in
-	make.top.equalTo(16.auto())
-	make.left.right.equalToSuperview().inset(15.auto())
-	make.bottom.equalTo(-26.auto())
+	make.top.equalTo(16.zoom())
+	make.left.right.equalToSuperview().inset(15.zoom())
+	make.bottom.equalTo(-26.zoom())
     }
 	
     lineView.snp.makeConstraints { (make) in
-	make.left.right.equalToSuperview().inset(15.auto())
+	make.left.right.equalToSuperview().inset(15.zoom())
 	make.top.equalTo(titleLabel.snp.bottom)
 	make.height.equalTo(1)
     }
         
     titleLabel.snp.makeConstraints { (make) in
         make.top.equalToSuperview()
-        make.left.equalTo(15.auto())
-        make.height.equalTo(48.auto())
+        make.left.equalTo(15.zoom())
+        make.height.equalTo(48.zoom())
     }
         
     stateLabel.snp.makeConstraints { (make) in
-        make.top.equalTo(lineView).offset(10.auto())
-        make.left.equalTo(15.auto())
-        make.height.equalTo(15.auto())
+        make.top.equalTo(lineView).offset(10.zoom())
+        make.left.equalTo(15.zoom())
+        make.height.equalTo(15.zoom())
     }
 }
 ```
@@ -91,7 +91,7 @@ private func setupLayout() {
 
 ```swift
 private lazy var cardView = UIView().then {
-    $0.cornerRadius = 6.auto()
+    $0.cornerRadius = 6.zoom()
     $0.backgroundColor = .white
 }
 
@@ -101,12 +101,12 @@ private lazy var lineView = UIView().then {
 
 private lazy var titleLabel = UILabel().then {
     $0.textColor = .black
-    $0.font = .systemFont(ofSize: 20.auto(), weight: .medium)
+    $0.font = .systemFont(ofSize: 20.zoom(), weight: .medium)
 }
 
 private lazy var stateLabel = UILabel().then {
     $0.textColor = .gray
-    $0.font = .systemFont(ofSize: 12.auto(), weight: .medium)
+    $0.font = .systemFont(ofSize: 12.zoom(), weight: .medium)
 }
 ```
 
