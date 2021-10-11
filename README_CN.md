@@ -7,18 +7,16 @@
 [![Carthage](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)&nbsp;
 [![Cocoapods](https://img.shields.io/cocoapods/v/UIAdapter.svg)](https://cocoapods.org)
 
-## [:cn:天朝子民](README_CN.md)
+## 特性
 
-## Features
-
-- [x] Numerical type fast conversion
-- [x] Storyboard equal scale adaptation 
-- [x] Xib equal scale adaptation 
-- [x] Custom calculation processing
-- [x] Quick match for each screen size type
+- [x] 数值类型快速转换
+- [x] Storyboard 等比例适配支持 
+- [x] Xib 等比例适配支持 
+- [x] 自定义计算处理
+- [x] 各个屏幕尺寸快速匹配
 
 
-## Installation
+## 安装
 
 **CocoaPods - Podfile**
 
@@ -34,28 +32,27 @@ github "lixiang1994/UIAdapter"
 
 #### [Swift Package Manager for Apple platforms](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)
 
-Select Xcode menu `File > Swift Packages > Add Package Dependency` and enter repository URL with GUI.  
+选择 Xcode 菜单 `File > Swift Packages > Add Package Dependency` 输入仓库地址.  
 ```
 Repository: https://github.com/lixiang1994/UIAdapter
 ```
 
 #### [Swift Package Manager](https://swift.org/package-manager/)
 
-Add the following to the dependencies of your `Package.swift`:
+将以下内容添加到你的 `Package.swift`:
 ```swift
 .package(url: "https://github.com/lixiang1994/UIAdapter.git", from: "version")
 ```
 
-## Usage
+## 使用
 
-First make sure to import the framework:
+首先导入
 
 ```swift
 import UIAdapter
 ```
 
-Here are some usage examples. All devices are also available as simulators:
-
+下面是一些简单示例. 支持所有设备和模拟器:
 
 ### Auto
 
@@ -90,7 +87,7 @@ private func setupLayout() {
 }
 ```
 
-Property (Then):
+属性设置 (Then):
 
 ```swift
 private lazy var cardView = UIView().then {
@@ -115,12 +112,12 @@ private lazy var stateLabel = UILabel().then {
 
 Storyboard / Xib:
 
-![Constraint](Resources/Storyboard%20Constraint.png)
-![UILabel Font](Resources/Storyboard%20Label%20Font.png)
+![约束](Resources/Storyboard%20Constraint.png)
+![UILabel 字体大小](Resources/Storyboard%20Label%20Font.png)
 
-### Screen
+### Inch
 
-e.g.
+例子
 
 ```swift
 // default other screen numberOfLines = 0
@@ -141,41 +138,41 @@ label.numberOfLines = 0.screen.width(._320, is: 1).width(._375, is: 2).value
 ```swift
 print("this is " +
     "default".screen
-    .width(._320, is: "width 320")
-    .width(._375, is: "width 375")
-    .height(._844, is: "height 844")
-    .height(._812, is: "height 812")
-    .inch(._4_7, is: "4.7 inches")
-    .inch(._5_8, is: "5.8 inches")
-    .inch(._6_5, is: "6.5 inches")
-    .level(.compact, is: "screen 3: 2")
-    .level(.regular, is: "screen 16: 9")
-    .level(.full, is: "screen 19.5: 9")
+    .width(._320, is: "宽度 320")
+    .width(._375, is: "宽度 375")
+    .height(._844, is: "高度 844")
+    .height(._812, is: "高度 812")
+    .inch(._4_7, is: "4.7 英寸")
+    .inch(._5_8, is: "5.8 英寸")
+    .inch(._6_5, is: "6.5 英寸")
+    .level(.compact, is: "屏幕级别 紧凑屏")
+    .level(.regular, is: "屏幕级别 常规屏")
+    .level(.full, is: "屏幕级别 全面屏")
     .value
 )
 ```
 
 
-## Screenshot
+## 截屏
 
 ![TikTok 1](Resources/Storyboard%20TikTok%20Demo1.jpg)
 
 ![TikTok 2](Resources/Storyboard%20TikTok%20Demo2.jpg)
 
-## Contributing
+## 贡献
 
-If you have the need for a specific feature that you want implemented or if you experienced a bug, please open an issue.
-If you extended the functionality of UIAdapter yourself and want others to use it too, please submit a pull request.
+如果您需要实现特定功能或遇到错误，请打开issue。
+如果您自己扩展了UIAdapter的功能并希望其他人也使用它，请提交拉取请求。
 
+## 协议
 
-## License
-
-UIAdapter is under MIT license. See the [LICENSE](LICENSE) file for more info.
+UIAdapter 使用 MIT 协议. 有关更多信息，请参阅[LICENSE](LICENSE)文件.
 
 
 >### [相关文章 Inch](https://www.jianshu.com/p/d2c09cb65ef7)
 >### [相关文章 Auto](https://www.jianshu.com/p/e0e12206e0c7)
 >### [相关文章 Auto](https://www.jianshu.com/p/48c67d0c95b6)
+
 
 -----
 
