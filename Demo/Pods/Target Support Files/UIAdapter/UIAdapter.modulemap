@@ -1,0 +1,6 @@
+framework module UIAdapter {
+  umbrella header "UIAdapter-umbrella.h"
+
+  export *
+  module * { export * }
+}

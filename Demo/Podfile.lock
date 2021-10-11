@@ -1,0 +1,16 @@
+PODS:
+  - UIAdapter (1.0.0)
+
+DEPENDENCIES:
+  - UIAdapter (from `../`)
+
+EXTERNAL SOURCES:
+  UIAdapter:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  UIAdapter: 73a799a85af7a374da3d0769b0b26a2145e546df
+
+PODFILE CHECKSUM: 0793a3778780a57cf83a43faa9039eedb0b67f7a
+
+COCOAPODS: 1.11.2

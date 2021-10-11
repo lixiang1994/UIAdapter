@@ -21,7 +21,7 @@ import UIKit
 
 public enum UIAdapter {
     
-    enum Zoom {
+    public enum Zoom {
         
         /// 设置转换闭包
         ///
@@ -151,7 +151,7 @@ extension UIEdgeInsets: UIAdapterZoomCalculationable {
 
 extension NSLayoutConstraint {
     
-    @IBInspectable private var autoConstant: Bool {
+    @IBInspectable private var zoomConstant: Bool {
         get { return false }
         set {
             guard newValue else { return }
@@ -163,7 +163,7 @@ extension NSLayoutConstraint {
 
 extension UIView {
     
-    @IBInspectable private var autoCornerRadius: CGFloat {
+    @IBInspectable private var zoomCornerRadius: CGFloat {
         get { return layer.cornerRadius }
         set {
             let value: CGFloat = newValue.zoom()
@@ -175,7 +175,7 @@ extension UIView {
 
 extension UILabel {
     
-    @IBInspectable private var autoFont: Bool {
+    @IBInspectable private var zoomFont: Bool {
         get { return false }
         set {
             guard newValue else { return }
@@ -188,7 +188,7 @@ extension UILabel {
         }
     }
     
-    @IBInspectable private var autoLine: Bool {
+    @IBInspectable private var zoomLine: Bool {
         get { return false }
         set {
             guard newValue else { return }
@@ -198,7 +198,7 @@ extension UILabel {
         }
     }
     
-    @IBInspectable private var autoShadowOffset: Bool {
+    @IBInspectable private var zoomShadowOffset: Bool {
         get { return false }
         set {
             guard newValue else { return }
@@ -210,7 +210,7 @@ extension UILabel {
 
 extension UITextView {
     
-    @IBInspectable private var autoFont: Bool {
+    @IBInspectable private var zoomFont: Bool {
         get { return false }
         set {
             guard newValue else { return }
@@ -223,7 +223,7 @@ extension UITextView {
 
 extension UITextField {
     
-    @IBInspectable private var autoFont: Bool {
+    @IBInspectable private var zoomFont: Bool {
         get { return false }
         set {
             guard newValue else { return }
@@ -236,7 +236,7 @@ extension UITextField {
 
 extension UIImageView {
     
-    @IBInspectable private var autoImage: Bool {
+    @IBInspectable private var zoomImage: Bool {
         get { return false }
         set {
             guard newValue else { return }
@@ -253,7 +253,7 @@ extension UIImageView {
 
 extension UIButton {
     
-    @IBInspectable private var autoTitle: Bool {
+    @IBInspectable private var zoomTitle: Bool {
         get { return false }
         set {
             guard newValue else { return }
@@ -286,7 +286,7 @@ extension UIButton {
         }
     }
     
-    @IBInspectable private var autoImage: Bool {
+    @IBInspectable private var zoomImage: Bool {
         get { return false }
         set {
             guard newValue else { return }
@@ -324,7 +324,7 @@ extension UIButton {
         }
     }
     
-    @IBInspectable private var autoTitleInsets: Bool {
+    @IBInspectable private var zoomTitleInsets: Bool {
         get { return false }
         set {
             guard newValue else { return }
@@ -333,7 +333,7 @@ extension UIButton {
         }
     }
     
-    @IBInspectable private var autoImageInsets: Bool {
+    @IBInspectable private var zoomImageInsets: Bool {
         get { return false }
         set {
             guard newValue else { return }
@@ -342,7 +342,7 @@ extension UIButton {
         }
     }
     
-    @IBInspectable private var autoContentInsets: Bool {
+    @IBInspectable private var zoomContentInsets: Bool {
         get { return false }
         set {
             guard newValue else { return }
@@ -355,7 +355,7 @@ extension UIButton {
 @available(iOS 9.0, *)
 extension UIStackView {
     
-    @IBInspectable private var autoSpacing: Bool {
+    @IBInspectable private var zoomSpacing: Bool {
         get { return false }
         set {
             guard newValue else { return }
