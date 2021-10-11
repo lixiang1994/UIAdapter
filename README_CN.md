@@ -1,4 +1,4 @@
-# UIAdapter - 等比例缩放屏幕适配
+# UIAdapter - 优雅的iOS界面等比例缩放屏幕适配方案
 
 [![License](https://img.shields.io/cocoapods/l/UIAdapter.svg)](LICENSE)&nbsp;
 ![Swift](https://img.shields.io/badge/Swift-5.2-orange.svg)&nbsp;
@@ -10,9 +10,9 @@
 ## 特性
 
 - [x] 数值类型快速转换
-- [x] Storyboard 等比例适配支持 
-- [x] Xib 等比例适配支持 
-- [x] 自定义计算处理
+- [x] Storyboard 等比例缩放适配支持 
+- [x] Xib 等比例缩放适配支持 
+- [x] 自定义缩放计算处理
 - [x] 各个屏幕尺寸快速匹配
 
 
