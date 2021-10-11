@@ -1,4 +1,4 @@
-# UIAdapter - 等比例缩放屏幕适配
+# UIAdapter - 优雅的iOS界面等比例缩放屏幕适配方案
 
 [![License](https://img.shields.io/cocoapods/l/UIAdapter.svg)](LICENSE)&nbsp;
 ![Swift](https://img.shields.io/badge/Swift-5.2-orange.svg)&nbsp;
