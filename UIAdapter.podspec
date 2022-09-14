@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "UIAdapter"
-s.version      = "1.1.0"
+s.version      = "1.2.0"
 s.summary      = "iOS屏幕适配工具"
 
 s.homepage     = "https://github.com/lixiang1994/UIAdapter"

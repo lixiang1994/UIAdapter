@@ -11,6 +11,9 @@
 //  Copyright © 2018年 lee. All rights reserved.
 //
 
+// https://www.screensizes.app
+// https://useyourloaf.com/blog/iphone-14-screen-sizes/?continueFlag=d151fc49ec5161587c30f15faea0bee9
+
 import Foundation
 
 #if os(iOS)
@@ -128,8 +131,10 @@ extension UIAdapter.Screen {
         case _320 = 320
         case _375 = 375
         case _390 = 390
+        case _393 = 393
         case _414 = 414
         case _428 = 428
+        case _430 = 430
         
         public static var current: Width {
             guard !isPlus else { return ._414 }
@@ -145,8 +150,10 @@ extension UIAdapter.Screen {
         case _736 = 736
         case _812 = 812
         case _844 = 844
+        case _852 = 852
         case _896 = 896
         case _926 = 926
+        case _932 = 932
         
         public static var current: Height {
             guard !isPlus else { return ._736 }
@@ -191,13 +198,13 @@ extension UIAdapter.Screen {
             case (375, 812, 3):
                 return ._5_8
                 
-            case (414, 896, 2), (390, 844, 3):
+            case (414, 896, 2), (390, 844, 3), (393, 852, 3):
                 return ._6_1
 
             case (414, 896, 3):
                 return ._6_5
                 
-            case (428, 926, 3):
+            case (428, 926, 3), (430, 932, 3):
                 return ._6_7
                 
             default:
@@ -228,7 +235,7 @@ extension UIAdapter.Screen {
             case (320, 568), (375, 667), (414, 736):
                 return .regular
             
-            case (375, 812), (414, 896), (390, 844), (428, 926):
+            case (375, 812), (414, 896), (390, 844), (393, 852), (428, 926), (430, 932):
                 return .full
                 
             default:
