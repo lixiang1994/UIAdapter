@@ -54,7 +54,7 @@ extension UIAdapter.Zoom {
     }
 }
 
-protocol UIAdapterZoomCalculationable {
+public protocol UIAdapterZoomCalculationable {
     
     /// 缩放计算
     ///
@@ -64,7 +64,7 @@ protocol UIAdapterZoomCalculationable {
 
 extension Double: UIAdapterZoomCalculationable {
     
-    func zoom() -> Double {
+    public func zoom() -> Double {
         return UIAdapter.Zoom.conversion(self)
     }
 }
