@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "UIAdapter"
-s.version      = "1.2.1"
+s.version      = "1.3.0"
 s.summary      = "iOS屏幕适配工具"
 
 s.homepage     = "https://github.com/lixiang1994/UIAdapter"
@@ -22,4 +22,9 @@ s.swift_version = '5.3'
 
 s.cocoapods_version = '>= 1.4.0'
 
+  s.subspec 'Privacy' do |ss|
+      ss.resource_bundles = {
+        "Privacy" => 'Sources/PrivacyInfo.xcprivacy'
+      }
+  end
 end

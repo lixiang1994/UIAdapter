@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9BBE2D392BC565DE001F9632 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9BBE2D382BC565DE001F9632 /* PrivacyInfo.xcprivacy */; };
 		9BEB034A27140DFD003CC3DD /* UIAdapter.Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEB034627140DFD003CC3DD /* UIAdapter.Zoom.swift */; };
 		9BEB034B27140DFD003CC3DD /* UIAdapter.Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEB034827140DFD003CC3DD /* UIAdapter.Screen.swift */; };
 		9BEB034C27140ED7003CC3DD /* UIAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BEB034427140DFD003CC3DD /* UIAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9BBE2D382BC565DE001F9632 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		9BEB03372713EEBA003CC3DD /* UIAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BEB034427140DFD003CC3DD /* UIAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAdapter.h; sourceTree = "<group>"; };
 		9BEB034627140DFD003CC3DD /* UIAdapter.Zoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAdapter.Zoom.swift; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				9BEB034427140DFD003CC3DD /* UIAdapter.h */,
+				9BBE2D382BC565DE001F9632 /* PrivacyInfo.xcprivacy */,
 				9BEB034527140DFD003CC3DD /* Zoom */,
 				9BEB034727140DFD003CC3DD /* Screen */,
 			);
@@ -141,6 +144,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BBE2D392BC565DE001F9632 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
