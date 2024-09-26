@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
 s.name         = "UIAdapter"
-s.version      = "1.3.1"
+s.version      = "1.4.0"
 s.summary      = "iOS屏幕适配工具"
 
 s.homepage     = "https://github.com/lixiang1994/UIAdapter"
@@ -18,7 +18,7 @@ s.source_files  = "Sources/**/*.swift"
 
 s.requires_arc = true
 
-s.swift_version = '5.3'
+s.swift_version = '5.5'
 
 s.cocoapods_version = '>= 1.4.0'
 

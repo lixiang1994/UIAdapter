@@ -21,19 +21,27 @@ import Foundation
 import UIKit
 
 public class UIAdapterScreenWrapper<Base> {
-    let base: Base
+    
+    let base: Screen
     
     public private(set) var value: Base
     
-    init(_ base: Base) {
-        self.base = base
-        self.value = base
+    init(_ value: Base) {
+        self.base = .main
+        self.value = value
+    }
+    
+    init(_ value: Base, _ screen: UIScreen) {
+        self.base = .init(screen)
+        self.value = value
     }
 }
 
 public protocol UIAdapterScreenCompatible {
     associatedtype ScreenCompatibleType
     var screen: ScreenCompatibleType { get }
+    
+    func screen(_: UIScreen) -> ScreenCompatibleType
 }
 
 extension UIAdapterScreenCompatible {
@@ -41,60 +49,118 @@ extension UIAdapterScreenCompatible {
     public var screen: UIAdapterScreenWrapper<Self> {
         get { return UIAdapterScreenWrapper(self) }
     }
+    
+    public func screen(_ screen: UIScreen) -> UIAdapterScreenWrapper<Self> {
+        return UIAdapterScreenWrapper(self, screen)
+    }
 }
 
 extension UIAdapterScreenWrapper {
     
     public typealias Screen = UIAdapter.Screen
     
-    public func width(_ types: Screen.Width..., is value: Base) -> Self {
-        return width(types, is: value, zoomed: value)
+    public func width(_ range: Range<CGFloat>, is value: Base, zoomed: Base? = nil) -> Self {
+        return width({ range.contains($0) }, is: value, zoomed: zoomed ?? value)
     }
-    public func width(_ types: Screen.Width..., is value: Base, zoomed: Base) -> Self {
-        return width(types, is: value, zoomed: zoomed)
+    public func width(_ range: ClosedRange<CGFloat>, is value: Base, zoomed: Base? = nil) -> Self {
+        return width({ range.contains($0) }, is: value, zoomed: zoomed ?? value)
     }
-    private func width(_ types: [Screen.Width], is value: Base, zoomed: Base) -> Self {
-        for type in types where Screen.Width.current == type {
-            self.value = Screen.isZoomedMode ? zoomed : value
+    public func width(_ range: PartialRangeFrom<CGFloat>, is value: Base, zoomed: Base? = nil) -> Self {
+        return width({ range.contains($0) }, is: value, zoomed: zoomed ?? value)
+    }
+    public func width(_ range: PartialRangeUpTo<CGFloat>, is value: Base, zoomed: Base? = nil) -> Self {
+        return width({ range.contains($0) }, is: value, zoomed: zoomed ?? value)
+    }
+    public func width(_ range: PartialRangeThrough<CGFloat>, is value: Base, zoomed: Base? = nil) -> Self {
+        return width({ range.contains($0) }, is: value, zoomed: zoomed ?? value)
+    }
+    
+    public func width(greaterThan base: CGFloat, is value: Base, zoomed: Base? = nil) -> Self {
+        return width({ $0 > base }, is: value, zoomed: zoomed ?? value)
+    }
+    public func width(lessThan base: CGFloat, is value: Base, zoomed: Base? = nil) -> Self {
+        return width({ $0 < base }, is: value, zoomed: zoomed ?? value)
+    }
+    public func width(equalTo base: CGFloat, is value: Base, zoomed: Base? = nil) -> Self {
+        return width({ $0 == base }, is: value, zoomed: zoomed ?? value)
+    }
+    private func width(_ matching: (CGFloat) -> Bool, is value: Base, zoomed: Base) -> Self {
+        if matching(base.size.width) {
+            self.value = base.isZoomedMode ? zoomed : value
         }
         return self
     }
     
-    public func height(_ types: Screen.Height..., is value: Base) -> Self {
-        return height(types, is: value, zoomed: value)
+    public func height(_ range: Range<CGFloat>, is value: Base, zoomed: Base? = nil) -> Self {
+        return height({ range.contains($0) }, is: value, zoomed: zoomed ?? value)
     }
-    public func height(_ types: Screen.Height..., is value: Base, zoomed: Base) -> Self {
-        return height(types, is: value, zoomed: zoomed)
+    public func height(_ range: ClosedRange<CGFloat>, is value: Base, zoomed: Base? = nil) -> Self {
+        return height({ range.contains($0) }, is: value, zoomed: zoomed ?? value)
     }
-    private func height(_ types: [Screen.Height], is value: Base, zoomed: Base) -> Self {
-        for type in types where Screen.Height.current == type {
-            self.value = Screen.isZoomedMode ? zoomed : value
+    public func height(_ range: PartialRangeFrom<CGFloat>, is value: Base, zoomed: Base? = nil) -> Self {
+        return height({ range.contains($0) }, is: value, zoomed: zoomed ?? value)
+    }
+    public func height(_ range: PartialRangeUpTo<CGFloat>, is value: Base, zoomed: Base? = nil) -> Self {
+        return height({ range.contains($0) }, is: value, zoomed: zoomed ?? value)
+    }
+    public func height(_ range: PartialRangeThrough<CGFloat>, is value: Base, zoomed: Base? = nil) -> Self {
+        return height({ range.contains($0) }, is: value, zoomed: zoomed ?? value)
+    }
+    
+    public func height(greaterThan base: CGFloat, is value: Base, zoomed: Base? = nil) -> Self {
+        return height({ $0 > base }, is: value, zoomed: zoomed ?? value)
+    }
+    public func height(lessThan base: CGFloat, is value: Base, zoomed: Base? = nil) -> Self {
+        return height({ $0 < base }, is: value, zoomed: zoomed ?? value)
+    }
+    public func height(equalTo base: CGFloat, is value: Base, zoomed: Base? = nil) -> Self {
+        return height({ $0 == base }, is: value, zoomed: zoomed ?? value)
+    }
+    private func height(_ matching: (CGFloat) -> Bool, is value: Base, zoomed: Base) -> Self {
+        if matching(base.size.height) {
+            self.value = base.isZoomedMode ? zoomed : value
         }
         return self
     }
     
-    public func inch(_ types: Screen.Inch..., is value: Base) -> Self {
-        return inch(types, is: value, zoomed: value)
+    public func inch(_ range: Range<Double>, is value: Base, zoomed: Base? = nil) -> Self {
+        return inch({ range.contains($0.rawValue) }, is: value, zoomed: zoomed ?? value)
     }
-    public func inch(_ types: Screen.Inch..., is value: Base, zoomed: Base) -> Self {
-        return inch(types, is: value, zoomed: zoomed)
+    public func inch(_ range: ClosedRange<Double>, is value: Base, zoomed: Base? = nil) -> Self {
+        return inch({ range.contains($0.rawValue) }, is: value, zoomed: zoomed ?? value)
     }
-    private func inch(_ types: [Screen.Inch], is value: Base, zoomed: Base) -> Self {
-        for type in types where Screen.Inch.current == type {
-            self.value = Screen.isZoomedMode ? zoomed : value
+    public func inch(_ range: PartialRangeFrom<Double>, is value: Base, zoomed: Base? = nil) -> Self {
+        return inch({ range.contains($0.rawValue) }, is: value, zoomed: zoomed ?? value)
+    }
+    public func inch(_ range: PartialRangeUpTo<Double>, is value: Base, zoomed: Base? = nil) -> Self {
+        return inch({ range.contains($0.rawValue) }, is: value, zoomed: zoomed ?? value)
+    }
+    public func inch(_ range: PartialRangeThrough<Double>, is value: Base, zoomed: Base? = nil) -> Self {
+        return inch({ range.contains($0.rawValue) }, is: value, zoomed: zoomed ?? value)
+    }
+    private func inch(_ matching: (Screen.Inch) -> Bool, is value: Base, zoomed: Base) -> Self {
+        if matching(base.inch) {
+            self.value = base.isZoomedMode ? zoomed : value
         }
         return self
     }
     
-    public func level(_ types: Screen.Level..., is value: Base) -> Self {
-        return level(types, is: value, zoomed: value)
+    public func inch(_ types: Screen.Inch..., is value: Base, zoomed: Base? = nil) -> Self {
+        return inch(types, is: value, zoomed: zoomed ?? value)
     }
-    public func level(_ types: Screen.Level..., is value: Base, zoomed: Base) -> Self {
-        return level(types, is: value, zoomed: zoomed)
+    public func inch(_ types: [Screen.Inch], is value: Base, zoomed: Base? = nil) -> Self {
+        for type in types where base.inch == type {
+            self.value = base.isZoomedMode ? zoomed ?? value : value
+        }
+        return self
     }
-    private func level(_ types: [Screen.Level], is value: Base, zoomed: Base) -> Self {
-        for type in types where Screen.Level.current == type {
-            self.value = Screen.isZoomedMode ? zoomed : value
+    
+    public func level(_ types: Screen.Level..., is value: Base, zoomed: Base? = nil) -> Self {
+        return level(types, is: value, zoomed: zoomed ?? value)
+    }
+    public func level(_ types: [Screen.Level], is value: Base, zoomed: Base? = nil) -> Self {
+        for type in types where base.level == type {
+            self.value = base.isZoomedMode ? zoomed ?? value : value
         }
         return self
     }
@@ -102,64 +168,73 @@ extension UIAdapterScreenWrapper {
 
 extension UIAdapter {
     
-    public enum Screen {
+    public class Screen {
         
-        static var size: CGSize {
-            UIScreen.main.bounds.size
+        let base: UIScreen
+        
+        init(_ base: UIScreen) {
+            self.base = base
         }
-        static var nativeSize: CGSize {
-            UIScreen.main.nativeBounds.size
+        
+        public var size: CGSize {
+            base.bounds.size
         }
-        static var scale: CGFloat {
-            UIScreen.main.scale
+        public var nativeSize: CGSize {
+            base.nativeBounds.size
         }
-        static var nativeScale: CGFloat {
-            UIScreen.main.nativeScale
+        public var scale: CGFloat {
+            base.scale
         }
+        public var nativeScale: CGFloat {
+            base.nativeScale
+        }
+        
+        /// 是否为显示缩放模式
+        public var isZoomedMode: Bool {
+            guard !UIDevice.iPhonePlus else { return size.width == 375 }
+            guard !UIDevice.iPhoneMini else { return size.width == 320 }
+            return scale != nativeScale
+        }
+        
+        /// 真实宽高比 例如: iPhone 16 Pro (201:437)
+        public var aspectRatio: String {
+            if
+                let cache = _aspectRatio,
+                cache.0 == nativeSize {
+                return cache.1
+                
+            } else {
+                let result = base.aspectRatio
+                _aspectRatio = (nativeSize, result)
+                return result
+            }
+        }
+        private var _aspectRatio: (CGSize, String)?
+        
+        /// 标准宽高比 例如: iPhone 16 Pro (9:19.5)
+        public var standardAspectRatio: String {
+            if
+                let cache = _standardAspectRatio,
+                cache.0 == nativeSize {
+                return cache.1
+                
+            } else {
+                let result = base.standardAspectRatio
+                _standardAspectRatio = (nativeSize, result)
+                return result
+            }
+        }
+        private var _standardAspectRatio: (CGSize, String)?
     }
 }
 
 extension UIAdapter.Screen {
     
-    public static var isZoomedMode: Bool {
-        guard !isPlus else { return UIScreen.main.bounds.width == 375 }
-        return UIScreen.main.scale != UIScreen.main.nativeScale
-    }
-    
-    public enum Width: CGFloat {
-        case unknown = -1
-        case _320 = 320
-        case _375 = 375
-        case _390 = 390
-        case _393 = 393
-        case _414 = 414
-        case _428 = 428
-        case _430 = 430
-        
-        public static var current: Width {
-            guard !isPlus else { return ._414 }
-            return Width(rawValue: nativeSize.width / scale) ?? .unknown
-        }
-    }
-    
-    public enum Height: CGFloat {
-        case unknown = -1
-        case _480 = 480
-        case _568 = 568
-        case _667 = 667
-        case _736 = 736
-        case _812 = 812
-        case _844 = 844
-        case _852 = 852
-        case _896 = 896
-        case _926 = 926
-        case _932 = 932
-        
-        public static var current: Height {
-            guard !isPlus else { return ._736 }
-            return Height(rawValue: nativeSize.height / scale) ?? .unknown
-        }
-    }
+    /// 当前主屏幕
+    public static let main = UIAdapter.Screen(.main)
+}
+
+extension UIAdapter.Screen {
     
     public enum Inch: Double {
         case unknown = -1
@@ -170,46 +245,49 @@ extension UIAdapter.Screen {
         case _5_5 = 5.5
         case _5_8 = 5.8
         case _6_1 = 6.1
+        case _6_3 = 6.3
         case _6_5 = 6.5
         case _6_7 = 6.7
+        case _6_9 = 6.9
+    }
+    
+    public var inch: Inch {
+        switch (nativeSize.width / scale, nativeSize.height / scale, scale) {
+        case (320, 480, 2):
+            return ._3_5
+            
+        case (320, 568, 2):
+            return ._4_0
+            
+        case (375, 667, 2):
+            return ._4_7
+            
+        case (360, 780, 3) where UIDevice.iPhoneMini, (375, 812, 3) where UIDevice.iPhoneMini:
+            return ._5_4
+            
+        case (360, 640, 3) where UIDevice.iPhonePlus, (414, 736, 3) where UIDevice.iPhonePlus:
+            return ._5_5
         
-        public static var current: Inch {
-            guard !isPlus else {
-                // Plus 机型比较特殊 下面公式无法正确计算出尺寸
-                return ._5_5
-            }
+        case (375, 812, 3):
+            return ._5_8
             
-            switch (nativeSize.width / scale, nativeSize.height / scale, scale) {
-            case (320, 480, 2):
-                return ._3_5
-                
-            case (320, 568, 2):
-                return ._4_0
-                
-            case (375, 667, 2):
-                return ._4_7
-                
-            case (375, 812, 3) where UIDevice.iPhoneMini:
-                return ._5_4
-                
-            case (414, 736, 3):
-                return ._5_5
+        case (414, 896, 2), (390, 844, 3), (393, 852, 3):
+            return ._6_1
             
-            case (375, 812, 3):
-                return ._5_8
-                
-            case (414, 896, 2), (390, 844, 3), (393, 852, 3):
-                return ._6_1
+        case (402, 874, 3):
+            return ._6_3
 
-            case (414, 896, 3):
-                return ._6_5
-                
-            case (428, 926, 3), (430, 932, 3):
-                return ._6_7
-                
-            default:
-                return .unknown
-            }
+        case (414, 896, 3):
+            return ._6_5
+            
+        case (428, 926, 3), (430, 932, 3):
+            return ._6_7
+            
+        case (440, 956, 3):
+            return ._6_9
+            
+        default:
+            return .unknown
         }
     }
     
@@ -222,45 +300,33 @@ extension UIAdapter.Screen {
         /// 19.5: 9
         case full
         
-        public static var current: Level {
-            guard !isPlus else {
-                // Plus 机型比较特殊 下面公式无法正确计算出尺寸
-                return .regular
-            }
-            
-            switch (nativeSize.width / scale, nativeSize.height / scale) {
-            case (320, 480):
-                return .compact
-                
-            case (320, 568), (375, 667), (414, 736):
-                return .regular
-            
-            case (375, 812), (414, 896), (390, 844), (393, 852), (428, 926), (430, 932):
-                return .full
-                
-            default:
-                return .unknown
-            }
+        public var isCompact: Bool {
+            self == .compact
+        }
+        
+        public var isRegular: Bool {
+            self == .regular
+        }
+        
+        public var isFull: Bool {
+            self == .full
         }
     }
     
-    private static var isPlus: Bool {
-        return nativeSize.equalTo(.init(width: 1080, height: 1920))
-    }
-}
-
-extension UIAdapter.Screen {
-    
-    public static var isCompact: Bool {
-        return Level.current == .compact
-    }
-    
-    public static var isRegular: Bool {
-        return Level.current == .regular
-    }
-    
-    public static var isFull: Bool {
-        return Level.current == .full
+    public var level: Level {
+        switch standardAspectRatio {
+        case "3:4", "4:3":
+            return .compact
+            
+        case "9:16", "16:9":
+            return .regular
+        
+        case "9:19.5", "19.5:9":
+            return .full
+            
+        default:
+            return .unknown
+        }
     }
 }
 
@@ -281,15 +347,48 @@ extension UIEdgeInsets: UIAdapterScreenCompatible {}
 
 fileprivate extension UIDevice {
     
+    /// 是否使用了降采样
+    static var isUsingDownsampling: Bool {
+        return iPhoneMini || iPhonePlus
+    }
+    
     static var iPhoneMini: Bool {
+        let temp = ["iPhone13,1", "iPhone14,4"]
+        
         switch identifier {
         case "iPhone13,1", "iPhone14,4":
             return true
             
         case "i386", "x86_64", "arm64":
-            return ["iPhone13,1", "iPhone14,4"].contains(
-                ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? ""
-            )
+            return temp.contains(ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "")
+            
+        default:
+            return false
+        }
+    }
+    
+    static var iPhonePlus: Bool {
+        let temp = [
+            "iPhone7,1",
+            "iPhone8,2",
+            "iPhone9,2",
+            "iPhone9,4",
+            "iPhone10,2",
+            "iPhone10,5"
+        ]
+        
+        switch identifier {
+        case
+            "iPhone7,1",
+            "iPhone8,2",
+            "iPhone9,2",
+            "iPhone9,4",
+            "iPhone10,2",
+            "iPhone10,5":
+            return true
+            
+        case "i386", "x86_64", "arm64":
+            return temp.contains(ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "")
             
         default:
             return false
@@ -307,6 +406,83 @@ fileprivate extension UIDevice {
         }
         return identifier
     } ()
+}
+
+extension UIScreen {
+    
+    /// 真实宽高比 例如: iPhone 16 Pro (201:437)
+    var aspectRatio: String {
+        // 计算宽高比
+        let (ratioWidth, ratioHeight) = calculateAspectRatio(
+            width: nativeBounds.width,
+            height: nativeBounds.height
+        )
+        return "\(ratioWidth):\(ratioHeight)"
+    }
+    
+    /// 标准宽高比 例如: iPhone 16 Pro (9:19.5)
+    var standardAspectRatio: String {
+        // 获取近似的标准比例
+        return getStandardAspectRatio(
+            width: nativeBounds.width,
+            height: nativeBounds.height
+        )
+    }
+    
+    private func calculateAspectRatio(width: CGFloat, height: CGFloat) -> (Int, Int) {
+        // 计算最大公约数（欧几里得算法）
+        func gcd(_ a: Int, _ b: Int) -> Int {
+            var a = a
+            var b = b
+            while b != 0 {
+                let temp = b
+                b = a % b
+                a = temp
+            }
+            return a
+        }
+        
+        let precision: CGFloat = 1000  // 精度倍数
+        let widthInt = Int(width * precision)
+        let heightInt = Int(height * precision)
+        
+        let gcdValue = gcd(widthInt, heightInt)
+        
+        let ratioWidth = widthInt / gcdValue
+        let ratioHeight = heightInt / gcdValue
+        
+        return (ratioWidth, ratioHeight)
+    }
+    
+    private func getStandardAspectRatio(width: CGFloat, height: CGFloat) -> String {
+        let aspectRatio = width / height
+        
+        // 常见的屏幕比例
+        let commonRatios: [(ratio: CGFloat, description: String)] = [
+            (16.0/9.0, "16:9"),
+            (9.0/16.0, "9:16"),
+            (4.0/3.0, "4:3"),
+            (3.0/4.0, "3:4"),
+            (19.5/9.0, "19.5:9"),
+            (9.0/19.5, "9:19.5"),
+            (2.0/1.0, "2:1"),
+            (1.0/2.0, "1:2"),
+            (1.0/1.0, "1:1")
+        ]
+        
+        var closestRatio = commonRatios[0]
+        var smallestDifference = abs(aspectRatio - closestRatio.ratio)
+        
+        for ratio in commonRatios {
+            let difference = abs(aspectRatio - ratio.ratio)
+            if difference < smallestDifference {
+                smallestDifference = difference
+                closestRatio = ratio
+            }
+        }
+        
+        return closestRatio.description
+    }
 }
 
 #endif

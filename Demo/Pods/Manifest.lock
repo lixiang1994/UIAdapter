@@ -1,7 +1,7 @@
 PODS:
-  - UIAdapter (1.3.0):
-    - UIAdapter/Privacy (= 1.3.0)
-  - UIAdapter/Privacy (1.3.0)
+  - UIAdapter (1.4.0):
+    - UIAdapter/Privacy (= 1.4.0)
+  - UIAdapter/Privacy (1.4.0)
 
 DEPENDENCIES:
   - UIAdapter (from `../`)
@@ -11,8 +11,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  UIAdapter: 2c0c81c68b308e3ce8b4363d4f66b0ced8c1812f
+  UIAdapter: 81dd1efbab6c0d092ac0d02e12a3c6b84e3c3c99
 
-PODFILE CHECKSUM: 0793a3778780a57cf83a43faa9039eedb0b67f7a
+PODFILE CHECKSUM: 6c30ea2512eacb7800929df401f020c67f5b94ec
 
 COCOAPODS: 1.15.2
